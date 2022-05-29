@@ -20,7 +20,7 @@ public class byGeoLoc extends AppCompatActivity {
     String lat;
     String lon;
     String key = "5b1b578abf8b4ecc9b2f6e86e3b0ee17";
-    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&appid=" + key;
+    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&appid=" + key + "&units=metric";
     String weatherDescripion;
     double temperature;
     double windspeed;
@@ -37,7 +37,7 @@ public class byGeoLoc extends AppCompatActivity {
         if (bundle != null) {
             lat = bundle.getString("LAT:");
             lon = bundle.getString("LON:");
-            apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&appid=" + key;
+            apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&appid=" + key + "&units=metric";
         }
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
@@ -67,9 +67,9 @@ public class byGeoLoc extends AppCompatActivity {
         TextView weather = findViewById(R.id.weather);
         weather.setText(weatherDescripion);
         TextView temp = findViewById(R.id.temp);
-        temp.setText(Double.toString(temperature));
+        temp.setText(Double.toString(temperature) + " Celsius");
         TextView wind = findViewById(R.id.wind);
-        wind.setText(Double.toString(windspeed));
+        wind.setText(Double.toString(windspeed) + "m/s");
 
     }
 }

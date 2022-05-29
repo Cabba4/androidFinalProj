@@ -7,9 +7,11 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -26,9 +28,31 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setContentView(R.layout.activity_main);
     }
 
-
     double latitude;
     double longitude;
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putDouble("lat",latitude);
+        savedInstanceState.putDouble("lon",longitude);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        if(savedInstanceState!=null)
+        {
+            latitude = savedInstanceState.getDouble("lat");
+            longitude = savedInstanceState.getDouble("lon");
+            TextView locationView = (TextView) findViewById(R.id.editTextTextPersonName3);
+            locationView.setText("Lat: " + df.format(latitude) + " Long: " + df.format(longitude) );
+        }
+        else
+        {
+            Toast.makeText(this,"Error", Toast.LENGTH_LONG);
+        }
+    }
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -76,4 +100,32 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         locationView.setText("Lat: " + df.format(latitude) + " Long: " + df.format(longitude) );
 
     }
+
+    public void goToSo (View view) {
+        goToUrl ( "https://github.com/Cabba4/androidFinalProj");
+    }
+
+    private void goToUrl(String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+    }
+
 }

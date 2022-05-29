@@ -20,7 +20,7 @@ public class byLocation extends AppCompatActivity {
     private RequestQueue queue;
     String city;
     String key = "5b1b578abf8b4ecc9b2f6e86e3b0ee17";
-    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&appid=" + key;
+    String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&appid=" + key + "&units=metric";
     String weatherDescripion;
     double temperature;
     double windspeed;
@@ -36,7 +36,7 @@ public class byLocation extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             city = intent.getStringExtra("CITY_NAME:");
-            apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&appid=" + key;
+            apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+ city + "&appid=" + key + "&units=metric";
         }
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
@@ -66,9 +66,9 @@ public class byLocation extends AppCompatActivity {
         TextView weather = findViewById(R.id.weather);
         weather.setText(weatherDescripion);
         TextView temp = findViewById(R.id.temp);
-        temp.setText(Double.toString(temperature));
+        temp.setText(Double.toString(temperature) + " Celsius");
         TextView wind = findViewById(R.id.wind);
-        wind.setText(Double.toString(windspeed));
+        wind.setText(Double.toString(windspeed) + "m/s");
 
     }
 }
