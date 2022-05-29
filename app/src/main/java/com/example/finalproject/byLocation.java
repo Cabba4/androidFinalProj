@@ -24,6 +24,7 @@ public class byLocation extends AppCompatActivity {
     String weatherDescripion;
     double temperature;
     double windspeed;
+    String cityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,6 +60,7 @@ public class byLocation extends AppCompatActivity {
             weatherDescripion = weather.getJSONArray("weather").getJSONObject(0).getString("description");
             temperature = weather.getJSONObject("main").getDouble("temp");
             windspeed = weather.getJSONObject("wind").getDouble("speed");
+            cityName = weather.getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -69,6 +71,8 @@ public class byLocation extends AppCompatActivity {
         temp.setText(Double.toString(temperature) + " Celsius");
         TextView wind = findViewById(R.id.wind);
         wind.setText(Double.toString(windspeed) + "m/s");
+        TextView city = findViewById(R.id.textView3);
+        city.setText(cityName);
 
     }
 }

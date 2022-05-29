@@ -22,6 +22,7 @@ public class byGeoLoc extends AppCompatActivity {
     String key = "5b1b578abf8b4ecc9b2f6e86e3b0ee17";
     String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat="+ lat + "&lon=" + lon + "&appid=" + key + "&units=metric";
     String weatherDescripion;
+    String cityName;
     double temperature;
     double windspeed;
     @Override
@@ -60,6 +61,7 @@ public class byGeoLoc extends AppCompatActivity {
             weatherDescripion = weather.getJSONArray("weather").getJSONObject(0).getString("description");
             temperature = weather.getJSONObject("main").getDouble("temp");
             windspeed = weather.getJSONObject("wind").getDouble("speed");
+            cityName = weather.getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -70,6 +72,7 @@ public class byGeoLoc extends AppCompatActivity {
         temp.setText(Double.toString(temperature) + " Celsius");
         TextView wind = findViewById(R.id.wind);
         wind.setText(Double.toString(windspeed) + "m/s");
-
+        TextView city = findViewById(R.id.textView2);
+        city.setText("You are in " + cityName);
     }
 }

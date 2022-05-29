@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
         else
         {
-            Toast.makeText(this,"Error", Toast.LENGTH_LONG);
+            Toast.makeText(this,"Error", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -85,10 +85,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         Intent intent = new Intent(this,byLocation.class);
         TextView textview = findViewById(R.id.editTextTextPersonName2);
-        String intentValue = textview.getText().toString();
-        intent.putExtra("CITY_NAME:",intentValue);
-
-        startActivity(intent);
+        if (textview.getText().toString().equals("")){
+            Toast.makeText(this,"Please Provide a City Name", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            String intentValue = textview.getText().toString();
+            intent.putExtra("CITY_NAME:",intentValue);
+            startActivity(intent);
+        }
     }
 
     @Override
