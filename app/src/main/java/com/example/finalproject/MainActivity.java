@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     double latitude;
     double longitude;
+    String cityName;
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putDouble("lat",latitude);
         savedInstanceState.putDouble("lon",longitude);
+        savedInstanceState.putString("city",cityName);
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState)
@@ -45,8 +47,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         {
             latitude = savedInstanceState.getDouble("lat");
             longitude = savedInstanceState.getDouble("lon");
+            cityName = savedInstanceState.getString("city");
             TextView locationView = (TextView) findViewById(R.id.editTextTextPersonName3);
+            TextView textview = findViewById(R.id.editTextTextPersonName2);
             locationView.setText("Lat: " + df.format(latitude) + " Long: " + df.format(longitude) );
+            textview.setText(cityName);
         }
         else
         {
@@ -90,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
         else
         {
-            String intentValue = textview.getText().toString();
-            intent.putExtra("CITY_NAME:",intentValue);
+            cityName = textview.getText().toString();
+            intent.putExtra("CITY_NAME:",cityName);
             startActivity(intent);
         }
     }
